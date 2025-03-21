@@ -1,0 +1,12 @@
+classes:
+  miner:
+    haste:
+      amplifier: 0
+    heatlhBoost:
+      amplifier: 0
+  fisherman:
+    water:
+      amplifier: 0
+  timberman:
+    wood:
+      multiplier: 2.0
