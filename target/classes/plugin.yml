@@ -1,20 +1,23 @@
 name: BasicMMO
-version: '1.0'
+version: '1.1'
 main: com.rs.basicMMO.BasicMMO
 api-version: '1.21'
 commands:
-  chooseclass:
+  chooseClass:
     description: Sınıf seçimini yapar.
     usage: /chooseclass <className>
-  levelup:
+  levelUp:
     description: Seviye atlamayı gerçekleştirir.
     usage: /levelup
-  xpinfo:
+  xpInfo:
     description: XP ve seviye bilgilerini görüntüler.
     usage: /xpinfo
-  classreload:
+  classReload:
     description: Sınıf efektlerini yeniden yükler.
     usage: /classreload
-  basicMMO:
+  BasicMMO:
     description: Yardım menüsünü gösterir.
     usage: /basicMMO
+  takeXp:
+    description: Zümrüt karşılığında xp kazanırsın.
+    usage: /takexp

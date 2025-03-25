@@ -12,9 +12,10 @@ public final class BasicMMO extends JavaPlugin {
 
         // Komutları kayıt ediyoruz
         getCommand("chooseclass").setExecutor(new ClassCommandExecutor(this));
-        // getCommand("levelup").setExecutor(new LevelUpCommandExecutor(this));
+        //getCommand("levelup").setExecutor(new LevelUpCommandExecutor(this));
         getCommand("xpinfo").setExecutor(new XPInfoCommandExecutor(this));
         getCommand("classreload").setExecutor(new ClassReloadCommandExecutor(this));
+        getCommand("takexp").setExecutor(new TakeXpCommandExecutor(this));
 
         // XP event listener'larını kaydediyoruz
         getServer().getPluginManager().registerEvents(new XPBlockListener(this), this);
