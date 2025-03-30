@@ -1,8 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="BasicMMO:jar">
+  <artifact type="jar" name="basicmmo:jar">
     <output-path>$USER_HOME$/Desktop/31/plugins</output-path>
-    <root id="archive" name="BasicMMO.jar">
-      <element id="module-output" name="BasicMMO" />
+    <root id="archive" name="basicmmo.jar">
+      <element id="module-output" name="basicmmo" />
     </root>
   </artifact>
 </component>

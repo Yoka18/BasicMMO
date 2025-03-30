@@ -51,7 +51,7 @@ public class XPFishListener implements Listener {
                 }
 
                 // Fisherman sınıfı için ek "hazine" drop şansı (Luck of the Sea etkisi gibi)
-                // Örnek: Seviye 1'de %10, her seviye %5 ekleniyor, maksimum %20
+                // Örnek: Seviye 1'de %10, her seviye %1 ekleniyor, maksimum %20
                 double baseTreasureChance = 0.10;
                 double levelBonus = (level - 1) * 0.01;
                 double treasureChance = Math.min(baseTreasureChance + levelBonus, 0.50);

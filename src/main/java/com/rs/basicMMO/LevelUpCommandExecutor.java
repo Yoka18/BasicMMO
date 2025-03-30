@@ -46,52 +46,16 @@ public class LevelUpCommandExecutor implements CommandExecutor {
         plugin.saveConfig();
 
         // Sınıfa özgü özellikleri güncelle
-        updateClassFeature(player, className, level);
+        updateClassFeature(player, className, level, config);
 
         return true;
     }
 
     // Her seviye için farklı özellikleri burada tanımlayabilirsiniz.
-    private void updateClassFeature(Player player, String className, int level) {
+    private void updateClassFeature(Player player, String className, int level, FileConfiguration config) {
         // Örnek: Her seviye için konsola farklı mesaj gönderme
         player.sendMessage(ChatColor.AQUA + "Tebrikler! " + level + ". seviyeye ulaştın.");
-
-        // Seçili sınıfa göre efekt güncellemesi yapalım:
-        if (className.equals("miner")) {
-            switch (level) {
-                case 10:
-                    player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1));
-                    player.sendMessage(ChatColor.GREEN + "Miner efektin güncellendi!");
-                    break;
-                default:
-                    player.sendMessage(ChatColor.GREEN + "Miner: Seviye " + level);
-                    break;
-            }
-
-        } else if (className.equals("fisherman")) {
-            switch (level) {
-                case 10:
-                    player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1));
-                    player.sendMessage(ChatColor.GREEN + "Fisherman efektin güncellendi!");
-                    break;
-                default:
-                    player.sendMessage(ChatColor.GREEN + "Fisherman: Seviye " + level);
-                    break;
-            }
-
-        } else if (className.equals("timberman")) {
-            switch (level) {
-                case 10:
-                    player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1));
-                    player.sendMessage(ChatColor.GREEN + "Timberman efektin güncellendi!");
-                    break;
-                default:
-                    player.sendMessage(ChatColor.GREEN + "Timberman: Seviye " + level);
-                    break;
-            }
-        }
+        ClassReloadCommandExecutor.ApplyClassEffects(className, level, player, config);
+        player.sendMessage(ChatColor.GREEN + "Yeni Seviye: " + level);
     }
 }

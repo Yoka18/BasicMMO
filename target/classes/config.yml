@@ -2,11 +2,17 @@ classes:
   miner:
     haste:
       amplifier: 0
-    heatlhBoost:
-      amplifier: 0
+    healthBoost:
+      amplifier: 1
   fisherman:
-    water:
+    night:
       amplifier: 0
+    healthBoost:
+      amplifier: 1
   timberman:
     wood:
       multiplier: 2.0
+    strength:
+      amplifier: 0
+    healthBoost:
+      amplifier: 1

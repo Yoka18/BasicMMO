@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/BasicMMO.iml" filepath="$PROJECT_DIR$/BasicMMO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/basicmmo.iml" filepath="$PROJECT_DIR$/basicmmo.iml" />
     </modules>
   </component>
 </project>

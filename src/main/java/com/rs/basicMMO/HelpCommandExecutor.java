@@ -26,8 +26,9 @@ public class HelpCommandExecutor implements CommandExecutor {
         player.sendMessage(ChatColor.WHITE + "Timberman");
         player.sendMessage(ChatColor.GOLD + "==== Yardım Menüsü ====");
         player.sendMessage(ChatColor.AQUA + "/chooseclass <className>" + ChatColor.WHITE + " - Sınıf seçimi yapar.");
-        player.sendMessage(ChatColor.AQUA + "/xpinfo" + ChatColor.WHITE + " - XP ve seviye bilgilerinizi gösterir.");
+        player.sendMessage(ChatColor.AQUA + "/levelinfo" + ChatColor.WHITE + " - XP ve seviye bilgilerinizi gösterir.");
         player.sendMessage(ChatColor.AQUA + "/classreload" + ChatColor.WHITE + " - Class efektlerini yeniden yükler.");
+        player.sendMessage(ChatColor.AQUA + "/takexp" + ChatColor.WHITE + " - Zümrüt karşılığında deneyim puanı ekler.");
         player.sendMessage(ChatColor.GOLD + "=======================");
         return true;
     }

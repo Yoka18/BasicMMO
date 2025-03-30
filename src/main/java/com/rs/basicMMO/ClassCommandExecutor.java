@@ -47,11 +47,14 @@ public class ClassCommandExecutor implements CommandExecutor {
             // Eski sınıfın efektini kaldırıyoruz
             if (oldClass.equals("miner")) {
                 player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
+                player.removePotionEffect(PotionEffectType.HASTE);
             } else if (oldClass.equals("fisherman")) {
+                player.removePotionEffect(PotionEffectType.NIGHT_VISION);
                 player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
             }
             else if (oldClass.equals("timberman")) {
                 player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
+                player.removePotionEffect(PotionEffectType.STRENGTH);
             }
             player.sendMessage(ChatColor.YELLOW + "Sınıf değiştirildi, seviye sıfırlandı.");
         }
