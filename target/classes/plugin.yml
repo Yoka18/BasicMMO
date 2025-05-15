@@ -21,3 +21,6 @@ commands:
   takeXp:
     description: Zümrüt karşılığında xp kazanırsın.
     usage: /takexp
+  skills:
+    description: Test
+    usage: /skills
