@@ -3,14 +3,21 @@ package com.rs.basicMMO;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class SkillGUI  {
+    private BasicMMO plugin;
+    public SkillGUI(BasicMMO plugin){
+        this.plugin = plugin;
+    }
+
     private final String generalSkillTreeName = ChatColor.DARK_GREEN + "Skill Tree";
     private final int generalSkillTreeSize = 9;
 
@@ -20,11 +27,12 @@ public class SkillGUI  {
         // Yetenekleri oluştur
         ItemStack classesItem = createSkillItem(Material.IRON_PICKAXE, "Classes", "Chose or look at your classes");
         ItemStack skillsItem = createSkillItem(Material.NETHER_STAR, "Skills", "Get new abilities");
-
+        ItemStack aboutItem = createSkillItem(Material.CHEST, "About", "About yourself");
 
         // GUI'ye yetenekleri yerleştir
         gui.setItem(0, classesItem);
-        gui.setItem(5, skillsItem);
+        gui.setItem(4, skillsItem);
+        gui.setItem(8, aboutItem);
 
 
         player.openInventory(gui);
@@ -86,6 +94,46 @@ public class SkillGUI  {
 
         player.openInventory(gui);
 
+    }
+
+    public void aboutGUI(Player player, BasicMMO plugin)
+    {
+        FileConfiguration config = plugin.getConfig();
+        String playerClass = config.getString("players." + player.getUniqueId() + ".class");
+        int level = config.getInt("players." + player.getUniqueId() + ".level", 1);
+        double xp = config.getDouble("players." + player.getUniqueId() + ".xp", 1);
+
+        List<Object> playerData = Arrays.asList(xp, level, playerClass);
+
+        player.closeInventory();
+        String aboutGUIName = ChatColor.DARK_GREEN + "About";
+        int aboutGUISize = 27;
+
+        Inventory gui = Bukkit.createInventory(null, aboutGUISize, aboutGUIName);
+
+        ItemStack playerItem = createSkillItem(Material.PLAYER_HEAD, "Player", "Your stats: ", "XP: {}", "Level: {}", "Class: {}");
+        ItemMeta playerItemMeta = playerItem.getItemMeta();
+        List<String> playerLore = playerItemMeta.getLore();
+
+        for (int i = 0; i < playerLore.size(); i++) {
+            String line = playerLore.get(i);
+            if (line.contains("{}")) {
+                if (i == 1) { // "XP: {}" satırı
+                    playerLore.set(i, ChatColor.GRAY + "XP: " + playerData.get(0).toString());
+                } else if (i == 2) { // "Level: {}" satırı
+                    playerLore.set(i, ChatColor.GRAY + "Level: " + playerData.get(1).toString());
+                } else if (i == 3) { // "Class: {}" satırı
+                    playerLore.set(i, ChatColor.GRAY + "Class: " + playerData.get(2).toString());
+                }
+            }
+        }
+
+        playerItemMeta.setLore(playerLore);
+        playerItem.setItemMeta(playerItemMeta);
+
+        gui.setItem(13, playerItem);
+
+        player.openInventory(gui);
     }
 
 

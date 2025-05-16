@@ -8,7 +8,12 @@ import com.rs.basicMMO.SkillGUI;
 
 public class SkillGUICommandExecutor implements CommandExecutor {
 
-    private final SkillGUI skillGUI = new SkillGUI();
+    private BasicMMO plugin;
+    public SkillGUICommandExecutor(BasicMMO plugin) {
+        this.plugin = plugin;
+    }
+
+    private final SkillGUI skillGUI = new SkillGUI(plugin);
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

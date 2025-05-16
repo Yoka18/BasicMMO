@@ -11,8 +11,13 @@ import org.bukkit.inventory.ItemStack;
 
 
 public class SkillTreeListener implements Listener{
+    private BasicMMO plugin;
+    public SkillTreeListener(BasicMMO plugin)
+    {
+        this.plugin = plugin;
+    }
+    SkillGUI skillGUI = new SkillGUI(plugin);
 
-    SkillGUI skillGUI = new SkillGUI();
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player)) {
@@ -41,6 +46,11 @@ public class SkillTreeListener implements Listener{
 
                     skillGUI.skillsGUI(player);
 
+                } else if(clickedItem.getType() == Material.CHEST &&
+                        clickedItem.getItemMeta() != null &&
+                        clickedItem.getItemMeta().getDisplayName().equals(ChatColor.YELLOW + "About")) {
+
+                    skillGUI.aboutGUI(player, plugin);
                 }
             }
         }

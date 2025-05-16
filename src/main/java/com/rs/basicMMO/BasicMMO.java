@@ -22,7 +22,7 @@ public final class BasicMMO extends JavaPlugin {
 
 
         // test
-        getCommand("skills").setExecutor(new SkillGUICommandExecutor());
+        getCommand("skills").setExecutor(new SkillGUICommandExecutor(this));
 
 
         // XP event listener'larını kaydediyoruz
@@ -30,7 +30,7 @@ public final class BasicMMO extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new XPFishListener(this), this);
         getServer().getPluginManager().registerEvents(new TimbermanListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerRespawnListener(this), this);
-        getServer().getPluginManager().registerEvents(new SkillTreeListener(), this);
+        getServer().getPluginManager().registerEvents(new SkillTreeListener(this), this);
 
 
     }
