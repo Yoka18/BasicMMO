@@ -1,50 +1,55 @@
 package com.rs.basicMMO;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
 
 public final class BasicMMO extends JavaPlugin {
 
+    private PlayerManager playerManager;
+    private GUIManager guiManager;
 
     @Override
-    public void onEnable(){
-        // Eğer config dosyası yoksa oluşturur
+    public void onEnable() {
         saveDefaultConfig();
-        getLogger().info("BasicMMO başarıyla yüklendi.");
 
-        // Komutları kayıt ediyoruz
-        getCommand("chooseclass").setExecutor(new ClassCommandExecutor(this));
-        //getCommand("levelup").setExecutor(new LevelUpCommandExecutor(this));
-        getCommand("levelinfo").setExecutor(new XPInfoCommandExecutor(this));
-        getCommand("classreload").setExecutor(new ClassReloadCommandExecutor(this));
-        getCommand("takexp").setExecutor(new TakeXpCommandExecutor(this));
-        getCommand("basicMMO").setExecutor(new HelpCommandExecutor(this));
+        // Yönetici sınıflarını başlat
+        this.playerManager = new PlayerManager(this);
+        this.guiManager = new GUIManager(playerManager);
 
+        // Komut yöneticisini kaydet (GUIManager'ı da constructor'a ekliyoruz)
+        getCommand("mmo").setExecutor(new MMOCommandExecutor(playerManager, guiManager));
+        getCommand("takexp").setExecutor(new TakeXpCommandExecutor(this)); // Bu komut hala bağımsız çalışabilir.
 
-        // test
-        getCommand("skills").setExecutor(new SkillGUICommandExecutor(this));
+        // Listener'ları kaydet
+        getServer().getPluginManager().registerEvents(new PlayerConnectionListener(playerManager), this);
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(playerManager), this);
+        getServer().getPluginManager().registerEvents(new PlayerFishListener(playerManager), this);
+        getServer().getPluginManager().registerEvents(new GUIListener(guiManager), this); // Yeni GUI listener
+        getServer().getPluginManager().registerEvents(new PlayerRespawnListener(this, playerManager), this); // Güncellenmiş Respawn listener
 
+        // Sunucudaki mevcut oyuncuları yükle (reload durumları için)
+        for (Player player : getServer().getOnlinePlayers()) {
+            playerManager.loadPlayerData(player);
+        }
 
-        // XP event listener'larını kaydediyoruz
-        getServer().getPluginManager().registerEvents(new XPBlockListener(this), this);
-        getServer().getPluginManager().registerEvents(new XPFishListener(this), this);
-        getServer().getPluginManager().registerEvents(new TimbermanListener(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerRespawnListener(this), this);
-        getServer().getPluginManager().registerEvents(new SkillTreeListener(this), this);
-
-
+        getLogger().info("Basic MMO was successfully loaded.");
     }
 
     @Override
     public void onDisable() {
-        // Kapanmadan önce yapılandırma dosyasını kaydet
-        saveConfig();
-
-        // Bu plugin tarafından planlanmış tüm görevleri iptal et
-        getServer().getScheduler().cancelTasks(this);
-
-        // Kapanma mesajını log'a yazdır
-        getLogger().info("ClassPlugin başarıyla kapatıldı.");
+        // Sunucudaki tüm oyuncuların verilerini kaydet
+        for (Player player : getServer().getOnlinePlayers()) {
+            playerManager.savePlayerData(player);
+        }
+        getLogger().info("BasicMMO was successfully shut down.");
     }
 
+    // Diğer sınıfların yöneticilere erişmesi için getter metotları (isteğe bağlı)
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
+    public GUIManager getGuiManager() {
+        return guiManager;
+    }
 }

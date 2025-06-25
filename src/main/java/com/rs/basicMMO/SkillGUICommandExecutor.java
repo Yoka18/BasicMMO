@@ -19,7 +19,7 @@ public class SkillGUICommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("skills")) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage("Bu komut sadece oyuncular tarafindan kullanilabilir.");
+                sender.sendMessage("This command can only be used by players.");
                 return true;
             }
             Player player = (Player) sender;

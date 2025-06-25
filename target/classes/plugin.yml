@@ -1,26 +1,15 @@
 name: BasicMMO
+version: 1.3
 main: com.rs.basicMMO.BasicMMO
-version: 1.2
-api-version: "1.21"
+api-version: 1.21
+author: inmisin
+description: A basic MMO-like class and skill plugin.
+
 commands:
-  chooseClass:
-    description: Sınıf seçimini yapar.
-    usage: /chooseclass <className>
-  levelUp:
-    description: Seviye atlamayı gerçekleştirir.
-    usage: /levelup
-  levelInfo:
-    description: XP ve seviye bilgilerini görüntüler.
-    usage: /levelinfo
-  classReload:
-    description: Sınıf efektlerini yeniden yükler.
-    usage: /classreload
-  BasicMMO:
-    description: Yardım menüsünü gösterir.
-    usage: /basicMMO
-  takeXp:
-    description: Zümrüt karşılığında xp kazanırsın.
-    usage: /takexp
-  skills:
-    description: Test
-    usage: /skills
+  mmo:
+    description: BasicMMO main command.
+    usage: /<command> [help|info|class|reload]
+    aliases: [mm, m]
+  takexp:
+    description: Adds experience points in exchange for emeralds.
+    usage: /<command>

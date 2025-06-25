@@ -21,7 +21,7 @@ public class TakeXpCommandExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
         if(!(sender instanceof Player))
         {
-            sender.sendMessage("Sadece oyuncular kullanabilir.");
+            sender.sendMessage("Only players can use it.");
             return true;
         }
 
@@ -30,7 +30,7 @@ public class TakeXpCommandExecutor implements CommandExecutor {
 
         if(handItem == null || handItem.getType() != Material.EMERALD)
         {
-            player.sendMessage(ChatColor.RED + "Elinde zümrüt yok!");
+            player.sendMessage(ChatColor.RED + "You don't have any emeralds!");
             return true;
         }
 
@@ -42,7 +42,7 @@ public class TakeXpCommandExecutor implements CommandExecutor {
             player.getInventory().setItemInMainHand(null);
         }
 
-        player.sendMessage(ChatColor.GREEN + "Zümrüt kullanıldı, gerçek XP kazandın!");
+        player.sendMessage(ChatColor.GREEN + "Emerald used, you get real XP!");
 
 
         return true;
